@@ -1,0 +1,20 @@
+<!DOCTYPE html> {% load staticfiles %} {% load compress %}
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>MilkShake - Home</title>
+
+    {% compress css %}
+    {# Bootstrap #}
+    <link rel="stylesheet" type="text/less" href="{% static "less/libs/bootstrap/bootstrap.less" %}"/>
+    {% endcompress %}
+</head>
+<body>
+    <div class="jumbotron">
+          <h1>Vous êtes bien connecté !</h1>
+          <p>Dommage, il n'y a rien à faire encore :)</p>
+          <p><a class="btn btn-primary btn-lg" role="button" href="/logout" alt="logout">Se déconnecter</a></p>
+    </div>
+</body>
