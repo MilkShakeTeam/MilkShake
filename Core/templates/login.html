@@ -58,6 +58,12 @@
                         </button>
                     </div>
                     <div class="message-container hidden alert"></div>
+                    <noscript>
+                        <div class="message-container alert alert-danger">
+                            <strong>{% trans "Warning" %}</strong><br/>
+                            {% trans "This application require javascript to work. Please enable it." %}
+                        </div>
+                    </noscript>
                 </fieldset>
             </form>
         </div>
