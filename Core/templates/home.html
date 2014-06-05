@@ -15,6 +15,10 @@
     {% compress css %}
     {# Bootstrap #}
     <link rel="stylesheet" type="text/less" href="{% static "less/libs/bootstrap/bootstrap.less" %}"/>
+    {# Sidebar #}
+    <link rel="stylesheet" type="text/less" href="{% static "less/sidebar.less" %}"/>
+    {# Page #}
+    <link rel="stylesheet" type="text/css" href="{% static 'less/core/home.less' %}" />
     {% endcompress %}
 </head>
 <body>
@@ -33,23 +37,14 @@
                     <li class="nav-header disabled"><a href="#">MilkShake</a></li>
                     <li class="active">
                         <a href="#">Accueil</a>
+                        <!--
                         <ul class="nav nav-pills nav-stacked nav-sub">
                             <li><a href="#">Sous-menu 1</a></li>
                             <li><a href="#">Sous-menu 2</a></li>
                         </ul>
+                        -->
                     </li>
-                    <li><a href="#">Utilisateur</a></li>
-                    <li><a href="#">Administration</a></li>
                     <li class="nav-header disabled"><a href="#">Plugins</a></li>
-                    <li><a href="#">Téléchargements</a></li>
-                    <li><a href="#">Musique</a></li>
-                    <li><a href="#">Vidéos</a></li>
-                    <li><a href="#">Images</a></li>
-                    <li><a href="#">Agenda</a></li>
-                    <li><a href="#">Mails</a></li>
-                    <li><a href="#">Météo</a></li>
-                    <li><a href="#">Système</a></li>
-                    <li><a href="#">Twitter</a></li>
                 </ul>
             </div>
             <input type="search" class="form-control sidebar-search" placeholder="Rechercher..." />
@@ -57,237 +52,11 @@
     </div>
     <div class="sidebar-circle"></div>
 
-<style>
-.container-fluid {
-    padding: 0;
-}
-.nav-sub > li > a:before {
-    content: "- ";
-}
-.nav-sub {
-    background-color: #E8E8E8;
-    padding-left: 20px;
-    list-style-type:circle
-}
-.sidebar-content {
-    height: 100%;
-    overflow-y: auto;
-    padding-bottom: 30px;
-}
-.nav > li.disabled.nav-header > a {
-    font-size: 17px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: center;
-    cursor: default;
-}
-.sidebar > .sidebar-search {
-    padding-left: 32px;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NEQ5NDdCNTFDQzREMTFFMkJGODRCQkQyMUJENjQ3NkEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NEQ5NDdCNTJDQzREMTFFMkJGODRCQkQyMUJENjQ3NkEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0RDk0N0I0RkNDNEQxMUUyQkY4NEJCRDIxQkQ2NDc2QSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0RDk0N0I1MENDNEQxMUUyQkY4NEJCRDIxQkQ2NDc2QSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PkLe3sEAAAEpUExURf///0BAQEpKSvj4+EFBQf39/ePj4/X19aqqqs7Ozvz8/FtbW0tLS8XFxYyMjODg4La2tkZGRlBQULCwsPT09Pr6+qmpqVlZWW1tba6urvPz8/7+/pCQkJGRkXZ2dlhYWFxcXK2trebm5p6enl9fX2VlZcLCwoaGhoODg8fHx2JiYsrKytzc3KWlpXx8fPv7+4CAgNfX1+zs7EVFRUxMTFNTU1ZWVsjIyLW1tVFRUZiYmJubm6ysrPLy8urq6o2NjdPT03R0dENDQ2RkZERERE1NTaGhocHBwbe3t3JyckhISNra2t/f3+np6dHR0Wtra1JSUsTExPn5+cDAwE9PT+/v75OTk7Ozs3h4eJeXl46OjpaWlpWVlW5ubl5eXs/Pz0dHR7+/v3p6emQFgQIAAAEMSURBVHjajJLVcgJBEEXnrgPrG1yCa4JDPMTd3e3/PyLLFjtLAlVJP906Z6amunsI+bvi7eKj+pS4F/w/uV9JGRhWNTozznm9h63Aw1fhA9xdbEz4eugut2KikEkDUoNytglG4p24kMabRsVGHyV2lCUDFhWLRzvXbtaqSFAR7ZgtN99uIkmF1WF8bj6NYEBFZYnLuY0VL7BHRfsQ4dGVbArmmdeHzmBbEXk+eFwHVK/39ZwM7JZDmWQYeJ2jvBbhYJicMyu57vFKwAZN5eU8ny+UD9YovxxyuUbi2RNNEL1392dtzsyzvxf02Z/O353zoQlOVJt3V4OTq34GbqzGlD8grJT0K/L/+hZgANn5GcyeTratAAAAAElFTkSuQmCC');
-    background-repeat: no-repeat;
-    background-position: 6px 6px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-.sidebar {
-    margin-right: -250px;
-    right: 250px;
-    width: 250px;
-    background: #DDD;
-    position: fixed;
-    height: 100%;
-    border-left: 1px dotted #AAA;
-}
-.sidebar-pinner-container {
-    position: relative;
-}
-.sidebar-pinner {
-    color: #FFF;
-    background-color: #800;
-    border-color: #600;
-    z-index: 10;
-    float: left;
-    position: absolute;
-    margin-top: 10px;
-    margin-left: 10px;
-}
-.sidebar-pinner.active {
-    background-color: #080;
-    border-color: #060;
-}
-.sidebar-circle {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 15px;
-    height: 15px;
-    border-left: 1px solid #CCF;
-    border-bottom: 1px solid #CCF;
-    background-color: #DDF;
-    border-radius: 0 0 0 90px;
-}
-.main-container {
-    float: left;
-    width: 100%;
-}
-html, body, .container-fluid, .main-container {
-    height: 100%;
-}
-.placeholder-content {
-    width: 100%;
-    height: 100%;
-    background-color: #FDD;
-    display: table;
-    width: 100%;
-}
-.placeholder-content > span {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    font-weight: bold;
-    font-size: 40px;
-}
-</style>
-
-<script>
-/**
- * Gestion de la sidebar
- */
-var Sidebar = (function() {
-
-    var self = {
-
-        /**
-         * Etat du pinnage de la sidebar
-         *
-         * @type boolean
-         * @private
-         */
-        _isPinned: false,
-
-        /**
-         * Initialisation de la vue
-         *
-         * @public
-         */
-        init: function() {
-            // Gestion des évènements
-            $(window).on('mousemove', self._onWindowMouseMove);
-            $(".sidebar-pinner").on("click", self._onClickSidebarPinner);
-
-            // Si le cookie d'épinglement est présent, affichage direct de la sidebar
-            if ( typeof $.cookie('sidebar-pinned') !== undefined && $.cookie('sidebar-pinned') ) {
-                $(".main-container").css("padding-right", 250);
-                $(".sidebar").css("display", "block");
-                $(".sidebar-circle").css("display", "none");
-                $(".sidebar-pinner").addClass("active");
-                self._isPinned = true;
-            }
-        },
-
-        /**
-         * Masque la sidebar
-         *
-         * @public
-         */
-        fadeIn: function() {
-            $(".sidebar-circle").fadeIn();
-            $(".main-container").css("padding-right", 0);
-            $(".sidebar").fadeOut();
-        },
-
-        /**
-         * Affiche la sidebar
-         *
-         * @public
-         */
-        fadeOut: function() {
-            $(".sidebar-circle").fadeOut();
-            $(".main-container").css("padding-right", 250);
-            $(".sidebar").fadeIn();
-        },
-
-        /**
-         * Gère l'affichage/la disparition de la sidebar
-         *
-         * @param object e Evènement
-         * @private
-         */
-        _toggleSidebar: function(e) {
-            if ( !$(".sidebar").is(":visible") ) {
-                if ( $(e.currentTarget).width() - e.pageX < 25 && e.pageY < 25 ) { // @TODO Magic number
-                    self.fadeOut();
-                }
-            } else if (!self._isPinned) {
-                if ( $(e.currentTarget).width() - e.pageX > 270 ) { // @TODO Magic number
-                    self.fadeIn();
-                }
-            }
-        },
-
-        /**
-         * Gère l'agrandissement/rétressissement du cercle de la sidebar
-         *
-         * @param object e Evènement
-         * @private
-         */
-        _updateSidebarCircle: function(e) {
-            if ( $(e.currentTarget).width() - e.pageX < 100 && e.pageY < 100 ) {
-                var radius = Math.max(100 - ($(e.currentTarget).width() - e.pageX ), 100 - e.pageY, 15);
-                $(".sidebar-circle").width(radius).height(radius);
-            } else {
-                $(".sidebar-circle").width(15).height(15);
-            }
-        },
-
-        /**
-         * Gère la sauvegarde de l'épinglement de la sidebar
-         *
-         * @param object e Evènement
-         * @private
-         */
-        _toggleSidebarPinned: function(e) {
-            // Mise à jour de l'état de l'épinglement de la sidebar
-            if ( self._isPinned = !$(e.currentTarget).hasClass("active") ) {
-                // Enregistrement du cookie pour le scope du site
-                $.cookie('sidebar-pinned', true, { expires: 30, path: '/' });
-            } else {
-                // Suppression du cookie
-                $.removeCookie('sidebar-pinned', { path: '/' });
-            }
-        },
-
-        /**
-         * Callback de l'évènement mousemove de la fenêtre
-         *
-         * @param object e Evènement
-         * @private
-         */
-        _onWindowMouseMove: function(e) {
-            self._toggleSidebar(e);
-            self._updateSidebarCircle(e);
-        },
-
-        /**
-         * Callback de l'evènement click du pinner de la barre latérale
-         *
-         * @param object e Evènement
-         * @private
-         */
-        _onClickSidebarPinner: function(e) {
-            self._toggleSidebarPinned(e);
-        }
-    };
-
-    return {
-        init: self.init,
-        hide: self.fadeIn,
-        show: self.fadeOut
-    };
-})();
-
-$(Sidebar.init);
-</script>
+    {% compress js %}
+    {# Script de la page #}
+    <script type="text/javascript" src="{% static 'js/core/home.js' %}"></script>
+    {# Sidebar #}
+    <script type="text/javascript" src="{% static 'js/sidebar.js' %}"></script>
+    {% endcompress %}
 </body>
 </html>
