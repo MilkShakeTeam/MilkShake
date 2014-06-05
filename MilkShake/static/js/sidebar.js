@@ -26,8 +26,8 @@ var Sidebar = (function() {
             // Si le cookie d'épinglement est présent, affichage direct de la sidebar
             if ( typeof $.cookie('sidebar-pinned') !== undefined && $.cookie('sidebar-pinned') ) {
                 $(".main-container").css("padding-right", 250);
-                $(".sidebar").css("display", "block");
-                $(".sidebar-circle").css("display", "none");
+                $("#milkshake-sidebar").css("display", "block");
+                $("#milkshake-sidebar-circle").css("display", "none");
                 $(".sidebar-pinner").addClass("active");
                 self._isPinned = true;
             }
@@ -39,9 +39,9 @@ var Sidebar = (function() {
          * @public
          */
         fadeIn: function() {
-            $(".sidebar-circle").fadeIn();
+            $("#milkshake-sidebar-circle").fadeIn();
             $(".main-container").css("padding-right", 0);
-            $(".sidebar").fadeOut();
+            $("#milkshake-sidebar").fadeOut();
         },
 
         /**
@@ -50,9 +50,9 @@ var Sidebar = (function() {
          * @public
          */
         fadeOut: function() {
-            $(".sidebar-circle").fadeOut();
+            $("#milkshake-sidebar-circle").fadeOut();
             $(".main-container").css("padding-right", 250);
-            $(".sidebar").fadeIn();
+            $("#milkshake-sidebar").fadeIn();
         },
 
         /**
@@ -62,7 +62,7 @@ var Sidebar = (function() {
          * @private
          */
         _toggleSidebar: function(e) {
-            if ( !$(".sidebar").is(":visible") ) {
+            if ( !$("#milkshake-sidebar").is(":visible") ) {
                 if ( $(e.currentTarget).width() - e.pageX < 25 && e.pageY < 25 ) { // @TODO Magic number
                     self.fadeOut();
                 }
@@ -82,9 +82,9 @@ var Sidebar = (function() {
         _updateSidebarCircle: function(e) {
             if ( $(e.currentTarget).width() - e.pageX < 100 && e.pageY < 100 ) {
                 var radius = Math.max(100 - ($(e.currentTarget).width() - e.pageX ), 100 - e.pageY, 15);
-                $(".sidebar-circle").width(radius).height(radius);
+                $("#milkshake-sidebar-circle").width(radius).height(radius);
             } else {
-                $(".sidebar-circle").width(15).height(15);
+                $("#milkshake-sidebar-circle").width(15).height(15);
             }
         },
 
@@ -98,10 +98,12 @@ var Sidebar = (function() {
             // Mise à jour de l'état de l'épinglement de la sidebar
             if ( self._isPinned = !$(e.currentTarget).hasClass("active") ) {
                 // Enregistrement du cookie pour le scope du site
-                $.cookie('sidebar-pinned', true, { expires: 30, path: '/' });
+                $.cookie('sidebar-pinned', true, { expires: 30, path: '/' })
+                $(".sidebar-pinner").addClass("active");
             } else {
                 // Suppression du cookie
                 $.removeCookie('sidebar-pinned', { path: '/' });
+                $(".sidebar-pinner").removeClass("active");
             }
         },
 

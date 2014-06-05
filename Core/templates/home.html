@@ -1,7 +1,7 @@
 <!DOCTYPE html> {% load staticfiles %} {% load compress %}
 <html>
 <head>
-    <meta charset=utf-8 />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <title>MilkShake - Home</title>
@@ -28,13 +28,15 @@
                 <span>Contenu de la page</span>
             </div>
         </div>
-        <div class="sidebar" style="display: none;">
+        <div id="milkshake-sidebar" style="display: none;">
             <div class="sidebar-content">
                 <div class="sidebar-pinner-container">
                     <button type="button" class="btn btn-sm glyphicon glyphicon-pushpin sidebar-pinner" data-toggle="button"></button>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="nav-header disabled"><a href="#">MilkShake</a></li>
+                    <li class="nav-header disabled">
+                        <a href="#">MilkShake</a>
+                    </li>
                     <li class="active">
                         <a href="#">Accueil</a>
                         <!--
@@ -49,8 +51,8 @@
             </div>
             <input type="search" class="form-control sidebar-search" placeholder="Rechercher..." />
         </div>
+        <div id="milkshake-sidebar-circle"></div>
     </div>
-    <div class="sidebar-circle"></div>
 
     {% compress js %}
     {# Script de la page #}
