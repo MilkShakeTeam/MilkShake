@@ -22,5 +22,5 @@ class Command(NoArgsCommand):
 
                 # Génération des fichiers de traduction associés à l'application
                 print colored("[" + folder + "]", 'red', attrs=['bold'])
-                os.system("python django-admin.py makemessages -l en --settings=settings")
+                os.system("python django-admin.py makemessages -l fr --settings=settings")
                 os.system("python django-admin.py makemessages -l pt --settings=settings")

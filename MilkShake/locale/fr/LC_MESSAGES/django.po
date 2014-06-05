@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-01 20:38+0200\n"
+"POT-Creation-Date: 2014-06-05 22:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,27 +16,16 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: views.py:25
-msgid "Veuillez renseigner l'identifiant et le mot de passe."
+#: settings.py:97
+msgid "English"
 msgstr ""
 
-#: views.py:26
-msgid "Identifiant où mot de passe incorrect."
+#: settings.py:98
+msgid "French"
 msgstr ""
 
-#: views.py:27
-msgid "Cet utilisateur n'est plus actif."
+#: settings.py:99
+msgid "Portuguese"
 msgstr ""
-
-#: templates/login.html:47
-msgid "Entrez votre identifiant"
-msgstr "Enter your login"
-
-#: templates/login.html:52
-msgid "Entrez votre mot de passe"
-msgstr "Enter your password"
-
-#: templates/login.html:57
-msgid "Connexion"
-msgstr "Login"

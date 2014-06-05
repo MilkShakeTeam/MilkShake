@@ -22,9 +22,9 @@ def login(request):
         return HttpResponseRedirect("/home")
 
     # Messages d'erreur
-    error_missing_credentials = ugettext(u"Veuillez renseigner l'identifiant et le mot de passe.")
-    error_bad_credentials     = ugettext(u"Identifiant où mot de passe incorrect.")
-    error_user_not_active     = ugettext(u"Cet utilisateur n'est plus actif.")
+    error_missing_credentials = ugettext(u"Please fill all the fields.")
+    error_bad_credentials     = ugettext(u"Incorrect login or password.")
+    error_user_not_active     = ugettext(u"This user is currently inactive.")
 
     if request.POST and request.is_ajax():
         contact_form = LoginForm(request.POST)

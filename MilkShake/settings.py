@@ -87,16 +87,16 @@ USE_I18N = True
 USE_L10N = True
 
 # Langue de l'application
-LANGUAGE_CODE = 'fr-fr'
+LANGUAGE_CODE = 'en-GB'
 
 # Timezone de l'application
 TIME_ZONE = 'Europe/Paris'
 
 # Langues disponibles pour l'application
 LANGUAGES = (
-    ('fr', gettext_lazy('Français')),
-    ('en', gettext_lazy('Anglais')),
-    ('pt', gettext_lazy('Portugais')),
+    ('en', gettext_lazy('English')),
+    ('fr', gettext_lazy('French')),
+    ('pt', gettext_lazy('Portuguese')),
 )
 
 # Dossiers des traductions
