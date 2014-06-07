@@ -10,6 +10,10 @@
     {# jQuery #}
     <script type="text/javascript" src="{% static "js/libs/jquery/jquery.js" %}"></script>
     <script type="text/javascript" src="{% static "js/libs/jquery/jquery.cookie.js" %}"></script>
+    {# Masonry #}
+    <script type="text/javascript" src="{% static "js/libs/masonry/packery.pkgd.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/libs/masonry/draggabilly.pkgd.js" %}"></script>
+
     {% endcompress %}
 
     {% compress css %}
@@ -23,10 +27,17 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="main-container">
-            <div class="placeholder-content">
-                <span>{% trans "Page contents" %}</span>
-            </div>
+        <div id="container" class="main-container packery draggable">
+
+            <div class="item">...</div>
+            <div class="item w2">...</div>
+            <div class="item">...</div>
+            <div class="item w2">...</div>
+            <div class="item w2">...</div>
+            <div class="item">...</div>
+            <div class="item he2 w2">...</div>
+            <div class="item he2">...</div>
+
         </div>
         <div id="milkshake-sidebar" style="display: none;">
             <div class="sidebar-content">
