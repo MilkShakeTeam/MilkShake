@@ -44,5 +44,30 @@ html, body, .container-fluid, .main-container {
     height: @basic-size;
     border: 1px #000000 solid;
 }
-.item.w2 { width: 2*@basic-size + @margin; }
-.item.he2 { height: 2*@basic-size + @margin; }
+.item.big-width { width: 2*@basic-size + @margin; }
+.item.big-height { height: 2*@basic-size + @margin; }
+
+// CSS du widget DDL Link
+
+.plugin-content {
+    margin: 5px 5px;
+
+    .plugin-title {
+        float: left;
+    }
+
+    .plugin-access {
+        margin-top: 5px;
+        float: right;
+        background-color: rgba(92, 184, 92, 0.5);
+    }
+
+    #ddl-submit {
+      text-align: right;
+      margin-top: 30px;
+    }
+}
+
+.clear {
+  clear: both;
+}
