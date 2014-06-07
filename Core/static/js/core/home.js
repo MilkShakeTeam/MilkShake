@@ -1,22 +1,22 @@
 $(function() {
     Sidebar.init();
-    
-  var container = document.querySelector('.packery');
-  var pckry = new Packery( container, {
-    columnWidth: 100,
-    rowHeight: 100,
-    itemSelector: '.item',
-    gutter: 20
-  });
 
-  var itemElems = pckry.getItemElements();
-  // for each item element
-  for ( var i=0, len = itemElems.length; i < len; i++ ) {
-    var elem = itemElems[i];
-    // make element draggable with Draggabilly
-    var draggie = new Draggabilly( elem );
-    // bind Draggabilly events to Packery
-    pckry.bindDraggabillyEvents( draggie );
-  }
+    var container = $('.main-container');
+    container.packery({
+        columnWidth: 200,
+        rowHeight: 200,
+        itemSelector: '.item',
+        gutter: 10
+    });
+
+    var itemElems = container.packery('getItemElements');
+    // for each item element
+    for ( var i=0, len = itemElems.length; i < len; i++ ) {
+        var elem = itemElems[i];
+        // make element draggable with Draggabilly
+        var draggie = new Draggabilly( elem );
+        // bind Draggabilly events to Packery
+        container.packery( 'bindDraggabillyEvents', draggie );
+    }
 
 });

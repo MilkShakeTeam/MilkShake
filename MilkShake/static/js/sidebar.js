@@ -13,6 +13,9 @@ var Sidebar = (function() {
          */
         _isPinned: false,
 
+        container: null,
+
+
         /**
          * Initialisation de la vue
          *
@@ -31,6 +34,9 @@ var Sidebar = (function() {
                 $(".sidebar-pinner").addClass("active");
                 self._isPinned = true;
             }
+            // Définition du conteneur par défaut
+            self.container = $(".main-container");
+
         },
 
         /**
@@ -42,6 +48,10 @@ var Sidebar = (function() {
             $("#milkshake-sidebar-circle").fadeIn();
             $(".main-container").css("padding-right", 0);
             $("#milkshake-sidebar").fadeOut();
+
+            // Si a la classe packery : accueil donc réajustement des widgets
+            if (self.container.hasClass("packery"))
+                self.container.packery()
         },
 
         /**
@@ -53,6 +63,10 @@ var Sidebar = (function() {
             $("#milkshake-sidebar-circle").fadeOut();
             $(".main-container").css("padding-right", 250);
             $("#milkshake-sidebar").fadeIn();
+
+            // Si a la classe packery : accueil donc réajustement des widgets
+            if (self.container.hasClass("packery"))
+                self.container.packery()
         },
 
         /**

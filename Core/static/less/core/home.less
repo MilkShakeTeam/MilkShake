@@ -1,6 +1,20 @@
+@basic-size: 200px;
+@margin: 10px;
+
+body {
+	margin:0;
+  	padding:0;
+  	background: url('/static/images/milkshake-transparent-30.svg') no-repeat center;
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+	background-size: cover;
+}
+
 .main-container {
     float: left;
     width: 100%;
+    padding: 10px 10px;
 }
 html, body, .container-fluid, .main-container {
     height: 100%;
@@ -25,6 +39,10 @@ html, body, .container-fluid, .main-container {
     padding: 0;
 }
 
-.item { width: 100px; height: 100px;  border: 1px #000000 solid; }
-.item.w2 { width: 200px; }
-.item.he2 { height: 200px; }
+.item {
+    width: @basic-size;
+    height: @basic-size;
+    border: 1px #000000 solid;
+}
+.item.w2 { width: 2*@basic-size + @margin; }
+.item.he2 { height: 2*@basic-size + @margin; }
