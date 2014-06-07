@@ -14,7 +14,9 @@ $(function() {
     for ( var i=0, len = itemElems.length; i < len; i++ ) {
         var elem = itemElems[i];
         // make element draggable with Draggabilly
-        var draggie = new Draggabilly( elem );
+        var draggie = new Draggabilly( elem, {
+            handle: '.handle'
+        } );
         // bind Draggabilly events to Packery
         container.packery( 'bindDraggabillyEvents', draggie );
     }
