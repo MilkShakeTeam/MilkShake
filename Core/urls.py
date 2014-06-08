@@ -6,8 +6,12 @@ from Core import views
 
 
 urlpatterns = patterns('',
+    # Route principale
     url(r'^$', views.index, name='index'),
-    url(r'^home', views.home, name='home'),
-    url(r'^login', views.login, name='login'),
+
+    # Route ajax
+    url(r'^login', views.login, name='ajax_login'),
+
+    # A revamper
     url(r'^logout', views.logout, name='logout'),
 )
