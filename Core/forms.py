@@ -8,8 +8,8 @@ from django.forms.forms import NON_FIELD_ERRORS
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(required=True, max_length=5)
-    password = forms.CharField(required=True, max_length=5)
+    username = forms.CharField(required=True)
+    password = forms.CharField(required=True)
 
     def clean(self):
         """
