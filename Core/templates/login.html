@@ -10,6 +10,8 @@
     {# jQuery #}
     <script type="text/javascript" src="{% static "js/libs/jquery/jquery.js" %}"></script>
     <script type="text/javascript" src="{% static "js/libs/jquery/jquery.cookie.js" %}"></script>
+    {# Scripts globaux #}
+    <script type="text/javascript" src="{% static "js/common.js" %}"></script>
     {% endcompress %}
 
     {% compress css %}
@@ -25,7 +27,6 @@
             <form class="form-horizontal" id="core-login" method="post" action="/">
                 <fieldset>
                     <legend class="h1">MilkShake</legend>
-                    {% csrf_token %}
                     <div class="alert alert-danger error-container hidden"><ul></ul></div>
                     <div class="row">
                         <div class="form-group">

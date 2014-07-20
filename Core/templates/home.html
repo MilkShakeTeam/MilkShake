@@ -10,7 +10,9 @@
     {# jQuery #}
     <script type="text/javascript" src="{% static "js/libs/jquery/jquery.js" %}"></script>
     <script type="text/javascript" src="{% static "js/libs/jquery/jquery.cookie.js" %}"></script>
-    {# backbone #}
+    {# Scripts globaux #}
+    <script type="text/javascript" src="{% static "js/common.js" %}"></script>
+    {# Backbone #}
     <script type="text/javascript" src="{% static "js/libs/backbone/underscore.js" %}"></script>
     <script type="text/javascript" src="{% static "js/libs/backbone/backbone.js" %}"></script>
     {# Masonry #}
@@ -30,7 +32,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div id="container" class="main-container packery draggable">
+        <div id="main-container" class="packery draggable">
             <div class="item">
                 <div class="plugin-content">
                     <div class="plugin-header handle">
@@ -59,25 +61,18 @@
             <div class="item">...</div>
             <div class="item big-width big-height">...</div>
             <div class="item big-height">...</div>
-
         </div>
         <div id="milkshake-sidebar" style="display: none;">
             <div class="sidebar-content">
                 <div class="sidebar-pinner-container">
-                    <button type="button" class="btn btn-sm glyphicon glyphicon-pushpin sidebar-pinner" data-toggle="button"></button>
+                    <button type="button" class="btn btn-sm glyphicon glyphicon-pushpin" id="milkshake-sidebar-pinner" data-toggle="button"></button>
                 </div>
-                <ul class="nav nav-pills nav-stacked">
+                <ul class="nav nav-pills nav-stacked" id="milkshake-sidebar-list">
                     <li class="nav-header disabled">
                         <a href="#">MilkShake</a>
                     </li>
                     <li class="active">
                         <a href="#">{% trans "Home" %}</a>
-                        <!--
-                        <ul class="nav nav-pills nav-stacked nav-sub">
-                            <li><a href="#">Sous-menu 1</a></li>
-                            <li><a href="#">Sous-menu 2</a></li>
-                        </ul>
-                        -->
                     </li>
                     <li>
                         <a href="/logout">{% trans "Logout" %}</a>

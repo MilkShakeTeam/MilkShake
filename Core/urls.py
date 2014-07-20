@@ -12,6 +12,9 @@ urlpatterns = patterns('',
     # Connexion
     url(r'^doLogin', views.do_login, name='do_login'),
 
+    # Listage des plugins utilisateur
+    url(r'^listUserPlugins', views.list_user_plugins, name='list_user_plugins'),
+
     # Logout
     url(r'^logout', views.logout, name='logout'),
 )

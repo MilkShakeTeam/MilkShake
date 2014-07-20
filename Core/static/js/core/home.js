@@ -1,7 +1,7 @@
 $(function() {
     Sidebar.init();
 
-    var container = $('.main-container');
+    var container = $('#main-container');
     container.packery({
         columnWidth: 200,
         rowHeight: 200,

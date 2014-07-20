@@ -6,10 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from forms import LoginForm
-from Core.decorators import ajax_required
+from Core.decorators import *
 from Core.formutils import FormUtils
+from MilkShake.settings import PLUGINS_DIR
 
 import json
+import os
 
 
 def index(request):
@@ -46,37 +48,6 @@ def login(request):
     return render(request, 'login.html', {'form': LoginForm()})
 
 
-@login_required
-def logout(request):
-    """
-    Rends la page de logout.
-
-    :param request: Objet correspondant a la requête utilisateur.
-    :type request: HttpRequest
-    :return: La vue et son code HTTP correspondant
-    :rtype: HttpResponse
-    """
-
-    # Déconnexion de l'utilisateur et redirection vers la page de login
-    django_logout(request)
-    return HttpResponseRedirect("/")
-
-
-@login_required
-def home(request):
-    """
-    Rends la page d'accueil.
-
-    :param request: Objet correspondant a la requête utilisateur
-    :type request: HttpRequest
-    :return: La vue et son code HTTP correspondant
-    :rtype: HttpResponse
-    """
-
-    # Affichage de la page d'accueil
-    return render(request, 'home.html')
-
-
 @ajax_required
 def do_login(request):
     """
@@ -95,7 +66,61 @@ def do_login(request):
     if not errors:
         # Pas d'erreurs; on effectue le login utilisateur et on rends un objet json de succès
         django_login(request, authenticate(username=request.POST['username'], password=request.POST['password']))
-        return HttpResponse(json.dumps({"success": True}))
+        return HttpResponse(json.dumps({'success': True}))
     else:
         # Des erreurs sont survenues; on rends un code d'erreur avec les informations inhérentes en json
         return HttpResponseBadRequest(errors)
+
+
+@login_required
+def logout(request):
+    """
+    Rends la page de logout.
+
+    :param request: Objet correspondant a la requête utilisateur.
+    :type request: HttpRequest
+    :return: La vue et son code HTTP correspondant
+    :rtype: HttpResponse
+    """
+
+    # Déconnexion de l'utilisateur et redirection vers la page de login
+    django_logout(request)
+    return HttpResponseRedirect('/')
+
+
+@login_required
+def home(request):
+    """
+    Rends la page d'accueil.
+
+    :param request: Objet correspondant a la requête utilisateur
+    :type request: HttpRequest
+    :return: La vue et son code HTTP correspondant
+    :rtype: HttpResponse
+    """
+
+    # Affichage de la page d'accueil
+    return render(request, 'home.html')
+
+
+@login_required_ajax
+def list_user_plugins(request):
+    """
+    Liste les différents plugins disponibles, et retourne les éléments <li> associés
+
+    @TODO: -Conception- Retourner du html déjà pré-fait (comme ici), ou envoyer une réponse
+                        au format JSON avec construction en JS des éléments envoyés?
+
+    :param request: Objet correspondant a la requête utilisateur
+    :type request: HttpRequest
+    :return: Code HTTP et réponse au format html correspondant aux plugins disponibles pour l'utilisateur
+    :rtype: HttpResponse
+    """
+
+    # Listing des différents plugins disponibles sur le disque
+    pluginList = ''
+    for pluginFolder in os.listdir(PLUGINS_DIR):
+        pluginList += '<li class="nav-plugin"><a href="#">' + pluginFolder + '</a></li>'
+
+    # On retourne la liste a l'utilisateur
+    return HttpResponse(pluginList)

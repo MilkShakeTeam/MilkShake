@@ -7,7 +7,11 @@ import os
 from django.utils.translation import gettext_lazy
 
 
+# Répertoire de base de l'application
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+# Répertoire de base des plugins
+PLUGINS_DIR = os.path.dirname(os.path.dirname(__file__) + "/../Plugins/")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '+eq@9^2&z%-e%t6vowlj@rhx#x7mg%$46w$k1km=l1@qfq_gk@'
