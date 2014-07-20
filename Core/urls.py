@@ -9,9 +9,9 @@ urlpatterns = patterns('',
     # Route principale
     url(r'^$', views.index, name='index'),
 
-    # Route ajax
-    url(r'^login', views.login, name='ajax_login'),
+    # Connexion
+    url(r'^doLogin', views.do_login, name='do_login'),
 
-    # A revamper
+    # Logout
     url(r'^logout', views.logout, name='logout'),
 )

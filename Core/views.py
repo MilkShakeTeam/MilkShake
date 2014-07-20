@@ -5,62 +5,97 @@ from django.contrib.auth import authenticate, login as django_login, logout as d
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-import json
-from Core.decorators import ajax_required
 from forms import LoginForm
+from Core.decorators import ajax_required
+from Core.formutils import FormUtils
+
+import json
 
 
 def index(request):
+    """
+    Page principale de l'application.
+    Rends la page de login si l'utilisateur n'es pas connecté, ou la page d'accueil dans le cas contraire.
+
+    @TODO Gérer le rechargement du dernier composant utilisé si un F5 arrive (ou un bookmark ou whatever)
+          Vraisemblablement a base de route + window.history.pushState
+
+    :param request: Objet correspondant a la requête utilisateur
+    :type request: HttpRequest
+    :return: La vue et son code HTTP correspondant
+    :rtype: HttpResponse
+    """
+
+    # Vérification de l'état d'auth de l'utilisateur afin de rendre la vue/action souhaitée
     if request.user.is_authenticated():
         return home(request)
     else:
-        return render(request, 'login.html', {'form': LoginForm()})
+        return login(request)
 
 
-@ajax_required
 def login(request):
-    contact_form = LoginForm(request.POST)
-    errors = form_validate(contact_form)
-
-    if not errors:
-        django_login(request, authenticate(username=request.POST['username'], password=request.POST['password']))
-        return HttpResponse(json.dumps({"success": True}))
-    else:
-        return HttpResponseBadRequest(errors)
-
-
-def form_validate(form):
     """
-    Validation d'un formulaire
+    Rends la page de login.
+
+    :param request: Objet correspondant a la requête utilisateur.
+    :type request: HttpRequest
+    :return: La vue et son code HTTP correspondant
+    :rtype: HttpResponse
     """
 
-    # Récupération des erreurs du formulaire si celui-ci est invalide
-    errors = {}
-    if not form.is_valid():
-        # Validation de chaque champ
-        for field in form:
-            if field.errors:
-                errors[field.html_name] = []
-                for error in field.errors:
-                    errors[field.html_name].append(error)
-
-        # Ajout des erreurs non-liées directement à des champs si existantes
-        non_field_errors = form.non_field_errors()
-        if non_field_errors:
-            errors["NON_FIELD_ERRORS"] = []
-            for error in non_field_errors:
-                errors["NON_FIELD_ERRORS"].append(error)
-
-    # On retourne les erreurs au format json ou null si pas d'erreurs
-    return json.dumps({"errors": errors}) if errors else None
+    return render(request, 'login.html', {'form': LoginForm()})
 
 
 @login_required
 def logout(request):
+    """
+    Rends la page de logout.
+
+    :param request: Objet correspondant a la requête utilisateur.
+    :type request: HttpRequest
+    :return: La vue et son code HTTP correspondant
+    :rtype: HttpResponse
+    """
+
+    # Déconnexion de l'utilisateur et redirection vers la page de login
     django_logout(request)
     return HttpResponseRedirect("/")
 
 
 @login_required
 def home(request):
+    """
+    Rends la page d'accueil.
+
+    :param request: Objet correspondant a la requête utilisateur
+    :type request: HttpRequest
+    :return: La vue et son code HTTP correspondant
+    :rtype: HttpResponse
+    """
+
+    # Affichage de la page d'accueil
     return render(request, 'home.html')
+
+
+@ajax_required
+def do_login(request):
+    """
+    Effectue une tentative de connexion de l'utilisateur.
+
+    :param request: Objet correspondant a la requête utilisateur
+    :type request: HttpRequest
+    :return: Code HTTP et réponse au format json correspondant au succès (ou a l'échec) de la tentative de login
+    :rtype: HttpResponse|HttpResponseBadRequest
+    """
+
+    # Récupération du contenu et validattion du formulaire
+    contact_form = LoginForm(request.POST)
+    errors = FormUtils.validate(contact_form)
+
+    if not errors:
+        # Pas d'erreurs; on effectue le login utilisateur et on rends un objet json de succès
+        django_login(request, authenticate(username=request.POST['username'], password=request.POST['password']))
+        return HttpResponse(json.dumps({"success": True}))
+    else:
+        # Des erreurs sont survenues; on rends un code d'erreur avec les informations inhérentes en json
+        return HttpResponseBadRequest(errors)

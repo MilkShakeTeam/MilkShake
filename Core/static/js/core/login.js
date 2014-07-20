@@ -3,7 +3,7 @@ $(function() {
         e.preventDefault();
 
         formValidation({
-            url: "login",
+            url: "doLogin",
             form: $(this),
             success: function() {
                 document.location.reload();
