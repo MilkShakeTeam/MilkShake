@@ -24,7 +24,8 @@
 <body>
     <div class="main-container">
         <div class="login-container">
-            <form class="form-horizontal" id="core-login" method="post" action="/">
+            <form class="form-horizontal" id="core-login" method="post" action="/doLogin">
+                {% csrf_token %}
                 <fieldset>
                     <legend class="h1">MilkShake</legend>
                     <div class="alert alert-danger error-container hidden"><ul></ul></div>
