@@ -8,15 +8,13 @@
 
     {% compress js %}
     {# jQuery #}
-    <script type="text/javascript" src="{% static "js/libs/jquery/jquery.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/libs/jquery/jquery.cookie.js" %}"></script>
-    {# Scripts globaux #}
-    <script type="text/javascript" src="{% static "js/common.js" %}"></script>
+    <script type="text/javascript" src="{% static 'js/libs/jquery/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/libs/jquery/jquery.cookie.js' %}"></script>
     {% endcompress %}
 
     {% compress css %}
     {# Bootstrap #}
-    <link rel="stylesheet" type="text/less" href="{% static "less/libs/bootstrap/bootstrap.less" %}"/>
+    <link rel="stylesheet" type="text/less" href="{% static 'less/libs/bootstrap/bootstrap.less' %}"/>
     {# Page #}
     <link rel="stylesheet" type="text/css" href="{% static 'less/core/login.less' %}" />
     {% endcompress %}
@@ -63,6 +61,8 @@
     {% compress js %}
     {# Script de la page #}
     <script type="text/javascript" src="{% static 'js/core/login.js' %}"></script>
+    {# Script de l'application #}
+    <script type="text/javascript" src="{% static 'js/milkshake.js' %}"></script>
     {% endcompress %}
 </body>
 </html>

@@ -8,11 +8,8 @@ from django.shortcuts import render
 from forms import LoginForm
 from Core.decorators import *
 from Core.formutils import FormUtils
-from MilkShake.settings import PLUGINS_DIR
 
 import json
-import os
-
 
 def index(request):
     """
@@ -101,26 +98,3 @@ def home(request):
 
     # Affichage de la page d'accueil
     return render(request, 'home.html')
-
-
-@login_required_ajax
-def list_user_plugins(request):
-    """
-    Liste les différents plugins disponibles, et retourne les éléments <li> associés
-
-    @TODO: -Conception- Retourner du html déjà pré-fait (comme ici), ou envoyer une réponse
-                        au format JSON avec construction en JS des éléments envoyés?
-
-    :param request: Objet correspondant a la requête utilisateur
-    :type request: HttpRequest
-    :return: Code HTTP et réponse au format html correspondant aux plugins disponibles pour l'utilisateur
-    :rtype: HttpResponse
-    """
-
-    # Listing des différents plugins disponibles sur le disque
-    pluginList = ''
-    for pluginFolder in os.listdir(PLUGINS_DIR):
-        pluginList += '<li class="nav-plugin"><a href="#">' + pluginFolder + '</a></li>'
-
-    # On retourne la liste a l'utilisateur
-    return HttpResponse(pluginList)

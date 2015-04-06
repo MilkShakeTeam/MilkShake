@@ -12,7 +12,7 @@ class PyNchLine():
     """
 
     # URL de base de Rapgenius
-    base_url = "http://rapgenius.com/"
+    base_url = "http://rap.genius.com/"
 
     # Copie des dernières données récupérées par pyNchLine
     last_call_data = ""
@@ -151,7 +151,13 @@ class PyNchLine():
             if not cls.base_url in url:
                 raise Exception("Not a valid Rapgenius URL.")
 
+        # Création d'un objet de requête afin de saisir des headers de compatibilité
+        # Un user agent Chrome Windows, sinon ça passe pas
+        request = urllib2.Request(url, headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36',
+        })
+
         # On retourne le contenu soupé (sauvegardé en cache si besoin ultérieur éventuel)
-        html = urllib2.urlopen(url).read()
+        html = urllib2.urlopen(request).read()
         cls.last_data = BeautifulSoup(html)
         return cls.last_data

@@ -8,60 +8,28 @@
 
     {% compress js %}
     {# jQuery #}
-    <script type="text/javascript" src="{% static "js/libs/jquery/jquery.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/libs/jquery/jquery.cookie.js" %}"></script>
-    {# Scripts globaux #}
-    <script type="text/javascript" src="{% static "js/common.js" %}"></script>
+    <script type="text/javascript" src="{% static 'js/libs/jquery/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/libs/jquery/jquery.cookie.js' %}"></script>
     {# Backbone #}
-    <script type="text/javascript" src="{% static "js/libs/backbone/underscore.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/libs/backbone/backbone.js" %}"></script>
+    <script type="text/javascript" src="{% static 'js/libs/backbone/underscore.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/libs/backbone/backbone.js' %}"></script>
     {# Masonry #}
-    <script type="text/javascript" src="{% static "js/libs/masonry/packery.pkgd.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/libs/masonry/draggabilly.pkgd.js" %}"></script>
-
+    <script type="text/javascript" src="{% static 'js/libs/masonry/packery.pkgd.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/libs/masonry/draggabilly.pkgd.js' %}"></script>
     {% endcompress %}
 
     {% compress css %}
     {# Bootstrap #}
-    <link rel="stylesheet" type="text/less" href="{% static "less/libs/bootstrap/bootstrap.less" %}"/>
+    <link rel="stylesheet" type="text/less" href="{% static 'less/libs/bootstrap/bootstrap.less' %}"/>
     {# Sidebar #}
-    <link rel="stylesheet" type="text/less" href="{% static "less/sidebar.less" %}"/>
+    <link rel="stylesheet" type="text/less" href="{% static 'less/sidebar.less' %}"/>
     {# Page #}
     <link rel="stylesheet" type="text/less" href="{% static 'less/core/home.less' %}" />
     {% endcompress %}
 </head>
-<body>
+<body class="logged-in">
     <div class="container-fluid">
-        <div id="main-container" class="packery draggable">
-            <div class="item">
-                <div class="plugin-content">
-                    <div class="plugin-header handle">
-                        <h4 class="plugin-title">{% trans "DDL" %}</h4>
-                        <button class="plugin-access btn btn-xs btn-success">{% trans "Access" %}</button>
-                        <hr class="clear"/>
-                    </div>
-                    <div class="plugin-body">
-                        <form class="form"  method="post" action="/">
-                            {% csrf_token %}
-                            <div id="ddl-form" class="form-group">
-                                <label for="ddl-link">{% trans "DDL link" %}</label>
-                                <input type="text" name="ddl-link" class="form-control input-xs center" />
-                            </div>
-                            <div id="ddl-submit">
-                                <input type="submit" class="btn btn-success" value="{% trans "Submit" %}"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="item big-width">...</div>
-            <div class="item">...</div>
-            <div class="item big-width">...</div>
-            <div class="item big-width">...</div>
-            <div class="item">...</div>
-            <div class="item big-width big-height">...</div>
-            <div class="item big-height">...</div>
-        </div>
+        <div id="main-container" class="packery draggable"></div>
         <div id="milkshake-sidebar" style="display: none;">
             <div class="sidebar-content">
                 <div class="sidebar-pinner-container">
@@ -80,16 +48,20 @@
                     <li class="nav-header disabled"><a href="#">Plugins</a></li>
                 </ul>
             </div>
-            <input type="search" class="form-control sidebar-search" placeholder="{% trans "Search..." %}" />
+            <input type="search" class="form-control sidebar-search" placeholder="{% trans 'Search...' %}" />
         </div>
         <div id="milkshake-sidebar-circle"></div>
     </div>
 
     {% compress js %}
-    {# Script de la page #}
-    <script type="text/javascript" src="{% static 'js/core/home.js' %}"></script>
+    {# Script de l'application #}
+    <script type="text/javascript" src="{% static 'js/milkshake.js' %}"></script>
     {# Sidebar #}
     <script type="text/javascript" src="{% static 'js/sidebar.js' %}"></script>
+    {# Widgets #}
+    <script type="text/javascript" src="{% static 'js/core/home_widgets.js' %}"></script>
+    {# Script de la page #}
+    <script type="text/javascript" src="{% static 'js/core/home.js' %}"></script>
     {% endcompress %}
 </body>
 </html>

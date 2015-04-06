@@ -1,6 +1,9 @@
-from django.conf.urls import patterns, include, url
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -9,4 +12,7 @@ urlpatterns = patterns('',
 
     # Noyau de l'application
     url(r'^', include('Core.urls', namespace="Core")),
+
+    # Routes des plugi
+    url(r'^', include('Plugins.urls', namespace="Plugins")),
 )

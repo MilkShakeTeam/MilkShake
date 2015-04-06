@@ -146,4 +146,5 @@ COMPRESS_ROOT = os.path.join(BASE_DIR, "MilkShake/static")
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
+
 # ///////////////////////////////////////////
