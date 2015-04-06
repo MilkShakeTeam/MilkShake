@@ -1,20 +1,19 @@
-<div class="item azerty-a">
+<div class="item big-width big-height">
     <div class="plugin-content">
         <div class="plugin-header handle">
-            <h4 class="plugin-title">DDL</h4>
-            <button class="plugin-access btn btn-xs btn-success">Access</button>
+            <h4 class="plugin-title">Lyrics by search terms</h4>
             <hr class="clear"/>
         </div>
         <div class="plugin-body">
-            <form class="form"  method="post" action="/">
-                <div id="ddl-form" class="form-group">
-                    <label for="ddl-link">DDL link</label>
-                    <input type="text" name="ddl-link" class="form-control input-xs center" />
-                </div>
-                <div id="ddl-submit">
-                    <input type="submit" class="btn btn-success" value="Submit" />
+            <form id="lyrics-by-search-terms-form" class="form" method="post" action="/">
+                <div class="input-group">
+                   <input name="lyrics-by-search-terms-search" id="lyrics-by-search-terms-search" type="text" class="form-control" placeholder="Search terms">
+                   <span class="input-group-btn">
+                        <input type="submit" class="btn btn-primary" value="Go !" style="width: 65px;" />
+                   </span>
                 </div>
             </form>
+            <div id="lyrics-by-search-terms-lyrics" style="margin-top: 10px; height: 290px; overflow-y: auto;"></div>
         </div>
     </div>
 </div>

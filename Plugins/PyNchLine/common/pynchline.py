@@ -8,11 +8,11 @@ import urllib2
 
 class PyNchLine():
     """
-    API de dialogue avec Rapgenius
+    API de dialogue avec Genius
     """
 
-    # URL de base de Rapgenius
-    base_url = "http://rap.genius.com/"
+    # URL de base de genius
+    base_url = "http://genius.com/"
 
     # Copie des dernières données récupérées par pyNchLine
     last_call_data = ""
@@ -75,7 +75,7 @@ class PyNchLine():
         return lyrics
 
     @classmethod
-    def get_random_song_by_artist(cls, artist, with_song_name=False):
+    def get_random_lyrics_by_artist(cls, artist, with_song_name=False):
         """
         Récupère une random chanson de l'artiste passé en paramètre
 
@@ -114,7 +114,7 @@ class PyNchLine():
         """
 
         # Récupération des lyrics d'une chanson au hasard de l'artiste
-        song_lyrics = cls.get_random_song_by_artist(artist)
+        song_lyrics = cls.get_random_lyrics_by_artist(artist)
 
         # On retourne une punchline au hasard, ni vide, [ni comme ceci]
         punchline = ""
@@ -143,13 +143,13 @@ class PyNchLine():
         """
 
         if not url:
-            # Si pas d'url passée en paramètre; formattage de l'url en fonction du contexte
+            # Si pas d'url passée en paramètre ; formatage de l'url en fonction du contexte
             url = cls.base_url + (cls.SEARCH_URL if ctx == "search" else
                                  (cls.ARTISTS_URL if ctx == "artists" else None)) + param
-        else:
+
+        elif cls.base_url not in url:
             # Si une url est passée en paramètre (appel explicite), exception si celle-ci ne pointe pas vers Rapgenius
-            if not cls.base_url in url:
-                raise Exception("Not a valid Rapgenius URL.")
+            raise Exception("Not a valid Rapgenius URL.")
 
         # Création d'un objet de requête afin de saisir des headers de compatibilité
         # Un user agent Chrome Windows, sinon ça passe pas

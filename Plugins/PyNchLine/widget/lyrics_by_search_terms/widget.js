@@ -1,15 +1,17 @@
-$("#random-punchline-by-artist-form").on("submit", function(e) {
+$("#lyrics-by-search-terms-form").on("submit", function(e) {
     e.preventDefault();
-    $("#random-punchline-by-artist-form input[type=submit]").attr("disabled", "disabled");
+    $("#lyrics-by-search-terms-form input[type=submit]").attr("disabled", "disabled");
 
-    $.get("/plugin/pynchline/getRandomPunchlineByArtist?", {
-        artist: $("#random-punchline-by-artist-artist").val()
+    $.get("/plugin/pynchline/getLyricsBySearchTerms", {
+        search: $("#lyrics-by-search-terms-search").val()
     }, function(response) {
         if ( response.success ) {
-            $("#random-punchline-by-artist-song").text("[" + response.data.song_name + "]");
-            $("#random-punchline-by-artist-punchline").text(response.data.punchline);
+            $("#lyrics-by-search-terms-lyrics").empty();
+            $.each(response.data.lyrics, function(index, line) {
+                $("#lyrics-by-search-terms-lyrics").append("<p>" + line + "</p>");
+            })
         }
 
-        $("#random-punchline-by-artist-form input[type=submit]").removeAttr("disabled");
+        $("#lyrics-by-search-terms-form input[type=submit]").removeAttr("disabled");
     });
 })
