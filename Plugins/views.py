@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseNotFound
 from Core.decorators import *
 from MilkShake.settings import PLUGINS_DIR
 
+import mimetypes
 import json
 import os
 
@@ -53,8 +54,8 @@ def get_plugins_and_widgets(request):
                         "name": widget_properties['name'] if 'name' in widget_properties else '',
                         "class": widget_properties['class'] if 'class' in widget_properties else '',
                         "resources": {
-                            "js": "/plugin/" + plugin_folder + "/widget/" + widget_folder + "/widget.js",
-                            "html": "/plugin/" + plugin_folder + "/widget/" + widget_folder + "/widget.html"
+                            "js": "/widgetResource?plugin=" + plugin_folder + "&widget=" + widget_folder + "&resource_type=js",
+                            "html": "/widgetResource?plugin=" + plugin_folder + "&widget=" + widget_folder + "&resource_type=html",
                         }
                     })
 
@@ -67,3 +68,26 @@ def get_plugins_and_widgets(request):
 
     # On retourne la liste a l'utilisateur
     return JsonResponse(plugin_list)
+
+@login_required_ajax
+def get_widget_resource(request):
+    # Récupération des paramètres d'entrée
+    plugin = request.GET.get('plugin')
+    widget = request.GET.get('widget')
+    resource_type = request.GET.get('resource_type')
+
+    # Validation basique des paramètres d'entrée
+    if plugin is None or widget is None or resource_type is None or resource_type not in ['html', 'js']:
+        return HttpResponseBadRequest()
+
+    # Construction du chemin du fichier
+    file_path = PLUGINS_DIR + '/' + plugin + '/widget/' + widget + '/widget.' + resource_type
+
+    # Vérification de la présence du fichier
+    if os.path.isfile(file_path):
+        # Fichier présent ; on l'ouvre et retourne
+        fsock = open(file_path, "r")
+        return HttpResponse(fsock, mimetypes.guess_type(file_path))
+    else:
+        print PLUGINS_DIR + '/' + plugin + '/widget/' + widget + '/widget.' + resource_type
+        return HttpResponseNotFound()

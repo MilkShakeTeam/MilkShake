@@ -73,11 +73,11 @@ var HomeWidgets = (function() {
                 $.each(pluginsWidgets, function(index, widgetData) {
 
                     // Récupération du contenu HTML du widget
-                    deferreds.push( $.get(widgetData.resources.html + "?" + $.now()) );
+                    deferreds.push( $.get(widgetData.resources.html) );
 
                     // Récupération de son JS associé
                     deferreds.push( $.ajax({
-                        url: widgetData.resources.js + "?" + $.now(),
+                        url: widgetData.resources.js,
                         // Hack pour ne pas que le script soit executé directement, mais à la suite
                         dataType: 'html'
                     }) );
